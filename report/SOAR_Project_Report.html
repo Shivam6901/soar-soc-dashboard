@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SOAR Network Defense Center — Software Engineering Project Report</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 24mm 22mm 24mm 22mm;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Computer Modern Serif", "Latin Modern Roman", "Georgia", "Times New Roman", serif;
+      font-size: 11pt;
+      line-height: 1.52;
+      color: #111827;
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    /* Title Page (Thapar LaTeX style) */
+    .title-page {
+      min-height: 242mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      text-align: center;
+      padding: 14mm 8mm 10mm 8mm;
+      page-break-after: always;
+    }
+
+    .course-line {
+      font-size: 13pt;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-top: 8mm;
+    }
+
+    .title-block {
+      margin: 18mm 0 12mm 0;
+    }
+
+    .project-title {
+      font-size: 22pt;
+      font-weight: 700;
+      margin: 0 0 6pt 0;
+      line-height: 1.25;
+    }
+
+    .project-subtitle {
+      font-size: 12pt;
+      font-weight: 400;
+      color: #374151;
+      margin: 0;
+    }
+
+    .submitted-block {
+      margin: 10mm 0;
+      font-size: 11.5pt;
+      line-height: 1.75;
+    }
+
+    .submitted-label {
+      font-weight: 700;
+      font-size: 12pt;
+      margin-bottom: 4pt;
+    }
+
+    .dept-footer {
+      margin-top: 14mm;
+      font-size: 11.5pt;
+      line-height: 1.65;
+    }
+
+    .dept-footer .dept-name {
+      font-weight: 700;
+      font-size: 12.5pt;
+    }
+
+    .repo-pill {
+      margin-top: 10mm;
+      padding: 6pt 12pt;
+      border: 1px solid #d1d5db;
+      background: #f9fafb;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 9.5pt;
+      color: #1f2937;
+    }
+
+    /* Running Header Strip inside chapters */
+    .page-header-bar {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 0.75pt solid #111827;
+      padding-bottom: 3pt;
+      margin-bottom: 14pt;
+      font-size: 9.5pt;
+      color: #374151;
+    }
+
+    /* Chapter & Headings */
+    .chapter-break {
+      page-break-before: always;
+    }
+
+    .chapter-header {
+      text-align: right;
+      border-bottom: 1pt solid #111827;
+      padding-bottom: 8pt;
+      margin-bottom: 18pt;
+    }
+
+    .chapter-num {
+      font-size: 14pt;
+      font-weight: 700;
+      margin-bottom: 4pt;
+    }
+
+    .chapter-title {
+      font-size: 22pt;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    h2 {
+      font-size: 14pt;
+      font-weight: 700;
+      margin: 18pt 0 6pt 0;
+      color: #000000;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 11.5pt;
+      font-weight: 700;
+      margin: 12pt 0 4pt 0;
+      color: #111827;
+      page-break-after: avoid;
+    }
+
+    p {
+      margin: 0 0 8pt 0;
+      text-align: justify;
+    }
+
+    ul, ol {
+      margin: 4pt 0 10pt 0;
+      padding-left: 20pt;
+    }
+
+    li {
+      margin-bottom: 4pt;
+      text-align: justify;
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 9.5pt;
+      background: #f3f4f6;
+      padding: 1pt 3pt;
+      border-radius: 2pt;
+    }
+
+    pre {
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 8.5pt;
+      line-height: 1.4;
+      background: #f8fafc;
+      border: 0.75pt solid #cbd5e1;
+      border-left: 2.5pt solid #1e3a8a;
+      padding: 8pt 10pt;
+      margin: 8pt 0 12pt 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      break-inside: avoid;
+    }
+
+    /* Contents TOC */
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 10pt 0;
+    }
+
+    .toc-ch {
+      font-weight: 700;
+      margin-top: 10pt;
+      font-size: 11.5pt;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .toc-sec {
+      padding-left: 16pt;
+      margin-top: 3pt;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5pt;
+    }
+
+    .toc-sub {
+      padding-left: 32pt;
+      margin-top: 2pt;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10pt;
+      color: #374151;
+    }
+
+    .toc-dots {
+      flex: 1;
+      border-bottom: 1pt dotted #9ca3af;
+      margin: 0 6pt 3pt 6pt;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 10pt 0 6pt 0;
+      font-size: 9.5pt;
+    }
+
+    th, td {
+      border: 0.75pt solid #374151;
+      padding: 5pt 7pt;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f3f4f6;
+      font-weight: 700;
+    }
+
+    tr {
+      break-inside: avoid;
+    }
+
+    .caption {
+      text-align: center;
+      font-size: 9.5pt;
+      color: #374151;
+      margin: 4pt 0 14pt 0;
+      font-style: italic;
+    }
+
+    /* Figures & Diagrams */
+    .figure-box {
+      border: 0.75pt solid #d1d5db;
+      background: #ffffff;
+      padding: 10pt;
+      margin: 10pt 0 4pt 0;
+      text-align: center;
+      break-inside: avoid;
+    }
+
+    .figure-box img {
+      max-width: 100%;
+      max-height: 115mm;
+      border: 0.5pt solid #9ca3af;
+    }
+
+    .figure-box svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .badge-pass {
+      font-family: "Consolas", monospace;
+      font-weight: 700;
+      color: #065f46;
+      background: #d1fae5;
+      padding: 1pt 4pt;
+      border-radius: 2pt;
+      font-size: 8.5pt;
+    }
+
+    .callout {
+      border: 0.75pt solid #cbd5e1;
+      border-left: 3pt solid #0f172a;
+      background: #f8fafc;
+      padding: 8pt 10pt;
+      margin: 8pt 0 12pt 0;
+      font-size: 10pt;
+      break-inside: avoid;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== TITLE PAGE ==================== -->
+  <div class="title-page">
+    <div class="course-line">UCS503 &mdash; Software Engineering</div>
+
+    <div class="title-block">
+      <h1 class="project-title">SOAR Network Defense Center</h1>
+      <p class="project-subtitle">
+        Real-Time Volumetric DDoS Telemetry, Automated Firewall Containment &amp; AI-Assisted Incident Triage
+      </p>
+    </div>
+
+    <div class="submitted-block">
+      <div class="submitted-label">Submitted by:</div>
+      <div>1024030845 &mdash; Shivam Batra</div>
+      <div>1024030851 &mdash; Emaan Dhillon</div>
+      <div style="margin-top: 8pt;">Group: 3C62 &mdash; B.E. Third Year, CSE (5th Semester)</div>
+    </div>
+
+    <div class="submitted-block">
+      <div class="submitted-label">Submitted to:</div>
+      <div>[Dr. / Ms. Faculty Member Name]</div>
+    </div>
+
+    <div class="repo-pill">
+      GitHub Repository: https://github.com/[your-username]/[soar-soc-dashboard]
+    </div>
+
+    <div class="dept-footer">
+      <div>Final / End-Semester Evaluation</div>
+      <div class="dept-name">Computer Science and Engineering Department</div>
+      <div>Thapar Institute of Engineering and Technology, Patiala</div>
+    </div>
+  </div>
+
+  <!-- ==================== TABLE OF CONTENTS ==================== -->
+  <div class="chapter-break">
+    <div class="chapter-header">
+      <h1 class="chapter-title">Contents</h1>
+    </div>
+
+    <div class="toc-list">
+      <div class="toc-ch"><span>1 &nbsp; Introduction</span><span class="toc-dots"></span><span>Ch. 1</span></div>
+      <div class="toc-sec"><span>1.1 Background and Context</span><span class="toc-dots"></span><span>1.1</span></div>
+      <div class="toc-sub"><span>1.1.1 Problem Statement</span><span class="toc-dots"></span><span>1.1.1</span></div>
+      <div class="toc-sec"><span>1.2 Project Objectives</span><span class="toc-dots"></span><span>1.2</span></div>
+      <div class="toc-sec"><span>1.3 Repository &amp; Source Artifacts</span><span class="toc-dots"></span><span>1.3</span></div>
+
+      <div class="toc-ch"><span>2 &nbsp; Methodology and Design</span><span class="toc-dots"></span><span>Ch. 2</span></div>
+      <div class="toc-sec"><span>2.1 System Architecture</span><span class="toc-dots"></span><span>2.1</span></div>
+      <div class="toc-sub"><span>2.1.1 High-Level Design &amp; Data Flow</span><span class="toc-dots"></span><span>2.1.1</span></div>
+      <div class="toc-sub"><span>2.1.2 Technical Stack</span><span class="toc-dots"></span><span>2.1.2</span></div>
+      <div class="toc-sec"><span>2.2 UML Design Diagrams</span><span class="toc-dots"></span><span>2.2</span></div>
+      <div class="toc-sub"><span>2.2.1 Use Case Diagram</span><span class="toc-dots"></span><span>2.2.1</span></div>
+      <div class="toc-sub"><span>2.2.2 Class &amp; Module Diagram</span><span class="toc-dots"></span><span>2.2.2</span></div>
+      <div class="toc-sub"><span>2.2.3 Sequence Diagram</span><span class="toc-dots"></span><span>2.2.3</span></div>
+      <div class="toc-sub"><span>2.2.4 Activity Diagram</span><span class="toc-dots"></span><span>2.2.4</span></div>
+      <div class="toc-sec"><span>2.3 Implementation Details</span><span class="toc-dots"></span><span>2.3</span></div>
+
+      <div class="toc-ch"><span>3 &nbsp; Results and Evaluation</span><span class="toc-dots"></span><span>Ch. 3</span></div>
+      <div class="toc-sec"><span>3.1 Testing Methodology</span><span class="toc-dots"></span><span>3.1</span></div>
+      <div class="toc-sec"><span>3.2 Comprehensive Test Cases</span><span class="toc-dots"></span><span>3.2</span></div>
+      <div class="toc-sec"><span>3.3 Test Case Execution &amp; Screenshots</span><span class="toc-dots"></span><span>3.3</span></div>
+      <div class="toc-sec"><span>3.4 Performance Metrics &amp; Graphical Analysis</span><span class="toc-dots"></span><span>3.4</span></div>
+      <div class="toc-sec"><span>3.5 Challenges &amp; Engineering Resolutions</span><span class="toc-dots"></span><span>3.5</span></div>
+
+      <div class="toc-ch"><span>4 &nbsp; Conclusion</span><span class="toc-dots"></span><span>Ch. 4</span></div>
+      <div class="toc-sec"><span>4.1 Summary of Work</span><span class="toc-dots"></span><span>4.1</span></div>
+      <div class="toc-sec"><span>4.2 Key Findings</span><span class="toc-dots"></span><span>4.2</span></div>
+      <div class="toc-sec"><span>4.3 Future Work and Recommendations</span><span class="toc-dots"></span><span>4.3</span></div>
+      <div class="toc-sec"><span>4.4 Final Remarks</span><span class="toc-dots"></span><span>4.4</span></div>
+
+      <div class="toc-ch"><span>5 &nbsp; Project Journals &amp; Individual Contributions</span><span class="toc-dots"></span><span>Ch. 5</span></div>
+      <div class="toc-sec"><span>5.1 Development Timeline &amp; Engineering Journal</span><span class="toc-dots"></span><span>5.1</span></div>
+      <div class="toc-sec"><span>5.2 Summary of Individual Contributions</span><span class="toc-dots"></span><span>5.2</span></div>
+
+      <div class="toc-ch"><span>Bibliography</span><span class="toc-dots"></span><span>Ref.</span></div>
+    </div>
+  </div>
+
+  <!-- ==================== CHAPTER 1 ==================== -->
+  <div class="chapter-break">
+    <div class="page-header-bar">
+      <span>Chapter 1 &mdash; Introduction</span>
+      <span>UCS503 &mdash; Software Engineering</span>
+    </div>
+    <div class="chapter-header">
+      <div class="chapter-num">Chapter 1</div>
+      <h1 class="chapter-title">Introduction</h1>
+    </div>
+
+    <h2>1.1 Background and Context</h2>
+    <p>
+      Modern Security Operations Centers (SOCs) face severe alert fatigue caused by high-frequency network telemetry,
+      volumetric Denial-of-Service (DoS/DDoS) bursts, and repetitive manual triage workflows. Traditional packet analyzers
+      such as Wireshark excel at deep frame dissection, while firewalls enforce packet drops, and threat intelligence
+      consoles summarize findings&mdash;yet analysts often switch manually between three or four disconnected tools before
+      containing an active flood.
+    </p>
+    <p>
+      Security Orchestration, Automation, and Response (SOAR) platforms bridge this gap by unifying real-time packet
+      ingestion, threshold-based anomaly detection, automated host/perimeter containment, active reconnaissance, and
+      AI-assisted incident summarization inside a single automated feedback loop.
+    </p>
+
+    <h3>1.1.1 Problem Statement</h3>
+    <p>
+      Lightweight educational and lab environments lack an integrated, cross-platform SOAR telemetry dashboard that can:
+      (i) capture live network traffic safely on consumer operating systems (Windows with Npcap and Linux) as well as
+      inspect offline <code>.pcap</code>/<code>.pcapng</code> captures, (ii) distinguish normal baseline traffic from
+      sustained volumetric floods without false positives on single-second bursts, (iii) automatically enforce real
+      operating-system firewall drop rules without locking out the host itself, and (iv) provide active port/service
+      reconnaissance paired with LLM-assisted triage summaries.
+    </p>
+
+    <h2>1.2 Project Objectives</h2>
+    <p>The project was structured around the following SMART engineering objectives:</p>
+    <ol>
+      <li>
+        <strong>Real-Time Telemetry &amp; Forensic Ingestion:</strong> Build a thread-safe Scapy-based capture pipeline
+        supporting multi-adapter live monitoring (Wi-Fi + Loopback) with port filtering and offline
+        <code>.pcap</code>/<code>.pcapng</code> forensic parsing.
+      </li>
+      <li>
+        <strong>Sustained Volumetric Anomaly Detection:</strong> Compute 1-second packet rates and a 2-second rolling
+        sustained average against a configurable threshold (Packets Per Second, PPS) to isolate attacking origin nodes
+        while preventing single-second false triggers.
+      </li>
+      <li>
+        <strong>Automated Cross-Platform Firewall Containment:</strong> Enforce real OS-level ingress blocks via
+        Windows Defender Firewall (<code>netsh advfirewall</code>) or Linux <code>iptables</code>, guarded by IP
+        validation and self-protection against blocking loopback or host IPs.
+      </li>
+      <li>
+        <strong>Active Reconnaissance &amp; AI Triage:</strong> Execute targeted host scans via Nmap (with a built-in
+        pure-Python TCP connect fallback across 18 common ports) and generate structured 3-point SOC triage summaries
+        using Google Gemini with rule-based fallback.
+      </li>
+      <li>
+        <strong>Interactive SOC Visualization &amp; Safe Demo Harness:</strong> Deliver a responsive Streamlit/Plotly
+        dashboard with an annotated multi-curve incident timeline and an isolated HTTP/TCP load simulator for safe
+        classroom evaluation without impacting campus Wi-Fi infrastructure.
+      </li>
+    </ol>
+
+    <h2>1.3 Repository &amp; Source Artifacts</h2>
+    <div class="callout">
+      <strong>GitHub Repository Link:</strong>
+      <code>https://github.com/[your-username]/[soar-soc-dashboard]</code><br />
+      All modular source files, automated unit/integration tests, and setup documentation are maintained in the repository
+      above (migrated from the initial Google Colab prototype <code>SOAR.ipynb</code> to a modular Python architecture).
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>File / Artifact</th>
+          <th>Role in Architecture</th>
+          <th>Key Responsibilities</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>streamlit_app.py</code></td>
+          <td>Presentation &amp; Orchestration</td>
+          <td>SOC Command Center UI, sidebar controls, sustained PPS detection, audit trail, frame inspector</td>
+        </tr>
+        <tr>
+          <td><code>capture.py</code></td>
+          <td>Packet Acquisition Layer</td>
+          <td>Thread-safe buffer (<code>deque</code>), Npcap interface discovery, port filtering, PCAP generator</td>
+        </tr>
+        <tr>
+          <td><code>firewall.py</code></td>
+          <td>Containment Engine</td>
+          <td>IP validation, self-IP guard, Windows <code>netsh advfirewall</code> &amp; Linux <code>iptables</code> rules</td>
+        </tr>
+        <tr>
+          <td><code>recon.py</code></td>
+          <td>Recon &amp; AI Triage</td>
+          <td>Nmap execution, 18-port Python TCP connect fallback, Gemini API auto-discovery &amp; HTML-safe triage</td>
+        </tr>
+        <tr>
+          <td><code>charts.py</code></td>
+          <td>Visualization Engine</td>
+          <td>Local timezone conversion, multi-curve Plotly spline timeline, breach shading &amp; block annotations</td>
+        </tr>
+        <tr>
+          <td><code>target_server.py</code></td>
+          <td>Target &amp; Client Load UI</td>
+          <td>Multi-threaded HTTP/1.1 target on port 8080 serving the <code>/demo</code> Client Traffic Load Simulator</td>
+        </tr>
+        <tr>
+          <td><code>attacker.py</code></td>
+          <td>CLI Load Harness</td>
+          <td>Two-phase standalone Python load generator for two-laptop hotspot testing</td>
+        </tr>
+        <tr>
+          <td><code>tests/test_soar.py</code></td>
+          <td>Verification Suite</td>
+          <td>8 automated unit and Streamlit <code>AppTest</code> integration test cases</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="caption">Table 1.1: Project Module Inventory</div>
+  </div>
+
+  <!-- ==================== CHAPTER 2 ==================== -->
+  <div class="chapter-break">
+    <div class="page-header-bar">
+      <span>Chapter 2 &mdash; Methodology and Design</span>
+      <span>UCS503 &mdash; Software Engineering</span>
+    </div>
+    <div class="chapter-header">
+      <div class="chapter-num">Chapter 2</div>
+      <h1 class="chapter-title">Methodology and Design</h1>
+    </div>
+
+    <h2>2.1 System Architecture</h2>
+    <p>
+      During the mid-semester phase, the system began as a monolithic Google Colab notebook coupled to Linux
+      <code>iptables</code> and <code>ngrok</code>. For end-semester deployment, the codebase was refactored into a
+      layered, modular Windows/Linux desktop architecture separating packet ingestion, detection analytics, firewall
+      enforcement, host reconnaissance, and UI rendering.
+    </p>
+
+    <h3>2.1.1 High-Level Design &amp; Data Flow</h3>
+    <p>
+      Incoming network traffic (from a remote mobile/laptop client or an uploaded forensic PCAP) enters the acquisition
+      layer, passes through port filtering (excluding Streamlit port <code>8501</code>), and lands in a bounded,
+      lock-protected ring buffer. The analytics loop aggregates frames into 1-second buckets in local time, computes a
+      2-second rolling sustained rate, updates the Plotly incident timeline, and triggers automated firewall containment
+      whenever Active Containment is enabled.
+    </p>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 760 250" width="720" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#1e293b"/>
+          </marker>
+        </defs>
+        <!-- Client -->
+        <rect x="12" y="30" width="130" height="64" rx="6" fill="#eff6ff" stroke="#1d4ed8" stroke-width="1.5"/>
+        <text x="77" y="55" text-anchor="middle" font-size="11" font-weight="bold" fill="#1e3a8a">Client / Attacker</text>
+        <text x="77" y="72" text-anchor="middle" font-size="9.5" fill="#334155">Load Simulator /</text>
+        <text x="77" y="85" text-anchor="middle" font-size="9.5" fill="#334155">Forensic PCAP</text>
+
+        <!-- Capture -->
+        <rect x="180" y="30" width="145" height="64" rx="6" fill="#f0fdf4" stroke="#15803d" stroke-width="1.5"/>
+        <text x="252" y="53" text-anchor="middle" font-size="11" font-weight="bold" fill="#14532d">capture.py</text>
+        <text x="252" y="69" text-anchor="middle" font-size="9.5" fill="#334155">Scapy AsyncSniffer</text>
+        <text x="252" y="83" text-anchor="middle" font-size="9.5" fill="#334155">Deque (max=2500)</text>
+
+        <!-- Detection -->
+        <rect x="365" y="30" width="165" height="64" rx="6" fill="#fefce8" stroke="#a16207" stroke-width="1.5"/>
+        <text x="447" y="53" text-anchor="middle" font-size="11" font-weight="bold" fill="#713f12">Detection Engine</text>
+        <text x="447" y="69" text-anchor="middle" font-size="9.5" fill="#334155">1s Resample + 2s Avg</text>
+        <text x="447" y="83" text-anchor="middle" font-size="9.5" fill="#334155">Window Attribution</text>
+
+        <!-- UI -->
+        <rect x="570" y="30" width="175" height="64" rx="6" fill="#f5f3ff" stroke="#6d28d9" stroke-width="1.5"/>
+        <text x="657" y="53" text-anchor="middle" font-size="11" font-weight="bold" fill="#4c1d95">UI &amp; charts.py</text>
+        <text x="657" y="69" text-anchor="middle" font-size="9.5" fill="#334155">Streamlit SOC Console</text>
+        <text x="657" y="83" text-anchor="middle" font-size="9.5" fill="#334155">Plotly Timeline + Hex</text>
+
+        <!-- Firewall -->
+        <rect x="255" y="155" width="200" height="68" rx="6" fill="#fef2f2" stroke="#b91c1c" stroke-width="1.5"/>
+        <text x="355" y="178" text-anchor="middle" font-size="11" font-weight="bold" fill="#7f1d1d">firewall.py</text>
+        <text x="355" y="194" text-anchor="middle" font-size="9.5" fill="#334155">IP Guard + Self-Host Check</text>
+        <text x="355" y="208" text-anchor="middle" font-size="9.5" fill="#334155">netsh advfirewall / iptables</text>
+
+        <!-- Recon -->
+        <rect x="515" y="155" width="215" height="68" rx="6" fill="#f8fafc" stroke="#334155" stroke-width="1.5"/>
+        <text x="622" y="178" text-anchor="middle" font-size="11" font-weight="bold" fill="#0f172a">recon.py</text>
+        <text x="622" y="194" text-anchor="middle" font-size="9.5" fill="#334155">Nmap / 18-Port TCP Fallback</text>
+        <text x="622" y="208" text-anchor="middle" font-size="9.5" fill="#334155">Gemini AI Triage Summary</text>
+
+        <!-- Arrows -->
+        <line x1="142" y1="62" x2="178" y2="62" stroke="#1e293b" stroke-width="1.4" marker-end="url(#arrow)"/>
+        <line x1="325" y1="62" x2="363" y2="62" stroke="#1e293b" stroke-width="1.4" marker-end="url(#arrow)"/>
+        <line x1="530" y1="62" x2="568" y2="62" stroke="#1e293b" stroke-width="1.4" marker-end="url(#arrow)"/>
+        <line x1="420" y1="94" x2="375" y2="153" stroke="#b91c1c" stroke-width="1.4" marker-end="url(#arrow)"/>
+        <line x1="635" y1="94" x2="625" y2="153" stroke="#334155" stroke-width="1.4" marker-end="url(#arrow)"/>
+        <path d="M 255 189 L 77 189 L 77 96" fill="none" stroke="#b91c1c" stroke-width="1.3" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <text x="165" y="182" text-anchor="middle" font-size="9" fill="#b91c1c">Drops Inbound Traffic</text>
+      </svg>
+    </div>
+    <div class="caption">Figure 2.1: High-Level System Architecture and Data Flow</div>
+
+    <h3>2.1.2 Technical Stack</h3>
+    <ul>
+      <li><strong>Language &amp; Runtime:</strong> Python 3.12.4</li>
+      <li><strong>UI &amp; Visualization:</strong> Streamlit, Plotly Graph Objects, custom dark SOC CSS</li>
+      <li><strong>Packet Capture &amp; Dissection:</strong> Scapy (<code>AsyncSniffer</code>, <code>PcapReader</code>, <code>wrpcap</code>) with Npcap driver on Windows</li>
+      <li><strong>Data Processing:</strong> Pandas (<code>resample('1s')</code>, rolling window aggregation, groupby analytics)</li>
+      <li><strong>Containment &amp; Recon:</strong> Windows Defender Firewall (<code>netsh advfirewall</code>), Linux <code>iptables</code>, Nmap / Python <code>socket</code> TCP fallback</li>
+      <li><strong>AI Incident Triage:</strong> Google Generative AI (<code>google-generativeai</code> / Gemini Flash models) with heuristic fallback</li>
+    </ul>
+
+    <h2>2.2 UML Design Diagrams</h2>
+
+    <h3>2.2.1 Use Case Diagram</h3>
+    <div class="figure-box">
+      <svg viewBox="0 0 720 260" width="690" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+        <rect x="165" y="12" width="380" height="236" rx="8" fill="#fafafa" stroke="#334155" stroke-width="1.4"/>
+        <text x="355" y="30" text-anchor="middle" font-size="11.5" font-weight="bold">SOAR Network Defense Center</text>
+
+        <!-- Actor Left: SOC Analyst -->
+        <circle cx="65" cy="85" r="14" fill="none" stroke="#0f172a" stroke-width="1.5"/>
+        <line x1="65" y1="99" x2="65" y2="140" stroke="#0f172a" stroke-width="1.5"/>
+        <line x1="42" y1="115" x2="88" y2="115" stroke="#0f172a" stroke-width="1.5"/>
+        <line x1="65" y1="140" x2="46" y2="168" stroke="#0f172a" stroke-width="1.5"/>
+        <line x1="65" y1="140" x2="84" y2="168" stroke="#0f172a" stroke-width="1.5"/>
+        <text x="65" y="185" text-anchor="middle" font-size="10.5" font-weight="bold">SOC Analyst</text>
+
+        <!-- Actor Right: External Systems -->
+        <rect x="595" y="45" width="110" height="38" rx="4" fill="#eff6ff" stroke="#1d4ed8"/>
+        <text x="650" y="68" text-anchor="middle" font-size="9.5" font-weight="bold">Client / Attacker</text>
+
+        <rect x="595" y="112" width="110" height="38" rx="4" fill="#fef2f2" stroke="#b91c1c"/>
+        <text x="650" y="135" text-anchor="middle" font-size="9.5" font-weight="bold">OS Firewall</text>
+
+        <rect x="595" y="178" width="110" height="38" rx="4" fill="#fefce8" stroke="#a16207"/>
+        <text x="650" y="201" text-anchor="middle" font-size="9.5" font-weight="bold">Gemini AI / Nmap</text>
+
+        <!-- Use Cases -->
+        <ellipse cx="355" cy="58" rx="120" ry="18" fill="#ffffff" stroke="#1e293b"/>
+        <text x="355" y="62" text-anchor="middle" font-size="10">Monitor Live Network Traffic</text>
+
+        <ellipse cx="355" cy="102" rx="120" ry="18" fill="#ffffff" stroke="#1e293b"/>
+        <text x="355" y="106" text-anchor="middle" font-size="10">Analyze Forensic PCAP Files</text>
+
+        <ellipse cx="355" cy="146" rx="120" ry="18" fill="#ffffff" stroke="#1e293b"/>
+        <text x="355" y="150" text-anchor="middle" font-size="10">Auto-Contain Volumetric Flood</text>
+
+        <ellipse cx="355" cy="190" rx="120" ry="18" fill="#ffffff" stroke="#1e293b"/>
+        <text x="355" y="194" text-anchor="middle" font-size="10">Run Active Recon &amp; AI Triage</text>
+
+        <ellipse cx="355" cy="230" rx="120" ry="15" fill="#ffffff" stroke="#1e293b"/>
+        <text x="355" y="234" text-anchor="middle" font-size="9.5">Flush Firewall &amp; Inspect Frames</text>
+
+        <!-- Links -->
+        <line x1="90" y1="110" x2="235" y2="58" stroke="#475569"/>
+        <line x1="90" y1="115" x2="235" y2="102" stroke="#475569"/>
+        <line x1="90" y1="120" x2="235" y2="146" stroke="#475569"/>
+        <line x1="90" y1="125" x2="235" y2="190" stroke="#475569"/>
+        <line x1="90" y1="130" x2="235" y2="230" stroke="#475569"/>
+
+        <line x1="475" y1="58" x2="595" y2="64" stroke="#475569"/>
+        <line x1="475" y1="146" x2="595" y2="131" stroke="#475569"/>
+        <line x1="475" y1="190" x2="595" y2="197" stroke="#475569"/>
+        <line x1="475" y1="230" x2="595" y2="131" stroke="#475569"/>
+      </svg>
+    </div>
+    <div class="caption">Figure 2.2: UML Use Case Diagram</div>
+
+    <h3>2.2.2 Class &amp; Module Diagram</h3>
+    <div class="figure-box">
+      <svg viewBox="0 0 740 280" width="710" xmlns="http://www.w3.org/2000/svg" font-family="Consolas, monospace">
+        <!-- streamlit_app -->
+        <rect x="245" y="10" width="250" height="72" fill="#f8fafc" stroke="#0f172a" stroke-width="1.3"/>
+        <line x1="245" y1="30" x2="495" y2="30" stroke="#0f172a"/>
+        <text x="370" y="24" text-anchor="middle" font-size="10.5" font-weight="bold">DashboardController (streamlit_app)</text>
+        <text x="253" y="45" font-size="8.5">+ live_records, mitigation_log</text>
+        <text x="253" y="58" font-size="8.5">+ ddos_threshold, defense_mode</text>
+        <text x="253" y="71" font-size="8.5">+ detect_sustained_breach()</text>
+
+        <!-- capture -->
+        <rect x="12" y="120" width="220" height="105" fill="#ffffff" stroke="#0f172a" stroke-width="1.2"/>
+        <line x1="12" y1="140" x2="232" y2="140" stroke="#0f172a"/>
+        <text x="122" y="134" text-anchor="middle" font-size="10" font-weight="bold">CaptureEngine (capture.py)</text>
+        <text x="20" y="155" font-size="8.5">- _PACKET_BUFFER: deque(2500)</text>
+        <text x="20" y="168" font-size="8.5">- _ALLOWED_PORT: int | None</text>
+        <text x="20" y="185" font-size="8.5">+ list_capture_interfaces()</text>
+        <text x="20" y="198" font-size="8.5">+ start_real_capture(iface, bpf)</text>
+        <text x="20" y="211" font-size="8.5">+ parse_packet_data(pkt)</text>
+
+        <!-- firewall -->
+        <rect x="260" y="120" width="220" height="105" fill="#ffffff" stroke="#0f172a" stroke-width="1.2"/>
+        <line x1="260" y1="140" x2="480" y2="140" stroke="#0f172a"/>
+        <text x="370" y="134" text-anchor="middle" font-size="10" font-weight="bold">FirewallGuard (firewall.py)</text>
+        <text x="268" y="155" font-size="8.5">+ RULE_PREFIX = "SOAR_BLOCK_"</text>
+        <text x="268" y="172" font-size="8.5">+ is_admin() : bool</text>
+        <text x="268" y="185" font-size="8.5">+ validate_blockable_ip(ip)</text>
+        <text x="268" y="198" font-size="8.5">+ enforce_firewall_drop(ip)</text>
+        <text x="268" y="211" font-size="8.5">+ flush_soar_firewall_rules()</text>
+
+        <!-- recon -->
+        <rect x="508" y="120" width="220" height="105" fill="#ffffff" stroke="#0f172a" stroke-width="1.2"/>
+        <line x1="508" y1="140" x2="728" y2="140" stroke="#0f172a"/>
+        <text x="618" y="134" text-anchor="middle" font-size="10" font-weight="bold">ReconTriage (recon.py)</text>
+        <text x="516" y="155" font-size="8.5">- _COMMON_PORTS: dict[18]</text>
+        <text x="516" y="172" font-size="8.5">+ find_nmap_binary()</text>
+        <text x="516" y="185" font-size="8.5">+ run_direct_nmap(ip, flags)</text>
+        <text x="516" y="198" font-size="8.5">+ init_gemini_model(key)</text>
+        <text x="516" y="211" font-size="8.5">+ generate_ai_threat_summary()</text>
+
+        <!-- charts & target -->
+        <rect x="130" y="242" width="220" height="32" fill="#f8fafc" stroke="#475569"/>
+        <text x="240" y="262" text-anchor="middle" font-size="9">charts.py (Timeline &amp; TZ)</text>
+
+        <rect x="390" y="242" width="220" height="32" fill="#f8fafc" stroke="#475569"/>
+        <text x="500" y="262" text-anchor="middle" font-size="9">target_server.py (ThreadedHTTP)</text>
+
+        <!-- Relations -->
+        <line x1="300" y1="82" x2="140" y2="120" stroke="#334155" stroke-width="1.2"/>
+        <line x1="370" y1="82" x2="370" y2="120" stroke="#334155" stroke-width="1.2"/>
+        <line x1="440" y1="82" x2="618" y2="120" stroke="#334155" stroke-width="1.2"/>
+        <line x1="290" y1="82" x2="240" y2="242" stroke="#64748b" stroke-dasharray="4,3"/>
+      </svg>
+    </div>
+    <div class="caption">Figure 2.3: UML Module / Class Diagram</div>
+
+    <h3>2.2.3 Sequence Diagram (Detection to Automated Containment)</h3>
+    <div class="figure-box">
+      <svg viewBox="0 0 740 275" width="710" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+        <defs>
+          <marker id="seq" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L7,3 z" fill="#0f172a"/>
+          </marker>
+        </defs>
+        <!-- Lifelines -->
+        <rect x="20" y="10" width="110" height="28" rx="4" fill="#eff6ff" stroke="#1d4ed8"/>
+        <text x="75" y="28" text-anchor="middle" font-size="10" font-weight="bold">Client / Attacker</text>
+        <line x1="75" y1="38" x2="75" y2="262" stroke="#94a3b8" stroke-dasharray="4,3"/>
+
+        <rect x="175" y="10" width="110" height="28" rx="4" fill="#f0fdf4" stroke="#15803d"/>
+        <text x="230" y="28" text-anchor="middle" font-size="10" font-weight="bold">CaptureEngine</text>
+        <line x1="230" y1="38" x2="230" y2="262" stroke="#94a3b8" stroke-dasharray="4,3"/>
+
+        <rect x="330" y="10" width="120" height="28" rx="4" fill="#fefce8" stroke="#a16207"/>
+        <text x="390" y="28" text-anchor="middle" font-size="10" font-weight="bold">SOC Dashboard</text>
+        <line x1="390" y1="38" x2="390" y2="262" stroke="#94a3b8" stroke-dasharray="4,3"/>
+
+        <rect x="490" y="10" width="110" height="28" rx="4" fill="#fef2f2" stroke="#b91c1c"/>
+        <text x="545" y="28" text-anchor="middle" font-size="10" font-weight="bold">OS Firewall</text>
+        <line x1="545" y1="38" x2="545" y2="262" stroke="#94a3b8" stroke-dasharray="4,3"/>
+
+        <rect x="625" y="10" width="100" height="28" rx="4" fill="#f5f3ff" stroke="#6d28d9"/>
+        <text x="675" y="28" text-anchor="middle" font-size="10" font-weight="bold">Recon / AI</text>
+        <line x1="675" y1="38" x2="675" y2="262" stroke="#94a3b8" stroke-dasharray="4,3"/>
+
+        <!-- Messages -->
+        <line x1="75" y1="62" x2="228" y2="62" stroke="#0f172a" marker-end="url(#seq)"/>
+        <text x="152" y="57" text-anchor="middle" font-size="9">1. Normal HTTP/TCP (~1 req/s)</text>
+
+        <line x1="230" y1="86" x2="388" y2="86" stroke="#0f172a" marker-end="url(#seq)"/>
+        <text x="309" y="81" text-anchor="middle" font-size="9">2. Buffer drain (&lt; threshold) -&gt; Green</text>
+
+        <line x1="75" y1="116" x2="228" y2="116" stroke="#b91c1c" stroke-width="1.5" marker-end="url(#seq)"/>
+        <text x="152" y="111" text-anchor="middle" font-size="9" fill="#b91c1c">3. Volumetric Flood Burst (&gt; 35 PPS)</text>
+
+        <line x1="230" y1="140" x2="388" y2="140" stroke="#0f172a" marker-end="url(#seq)"/>
+        <text x="309" y="135" text-anchor="middle" font-size="9">4. 2s Rolling Mean Exceeds Threshold</text>
+
+        <line x1="390" y1="168" x2="543" y2="168" stroke="#b91c1c" stroke-width="1.4" marker-end="url(#seq)"/>
+        <text x="467" y="163" text-anchor="middle" font-size="9">5. netsh add rule SOAR_BLOCK_IP</text>
+
+        <line x1="545" y1="194" x2="392" y2="194" stroke="#15803d" stroke-dasharray="4,2" marker-end="url(#seq)"/>
+        <text x="467" y="189" text-anchor="middle" font-size="9" fill="#15803d">6. Rule Active + Log Audit Trail</text>
+
+        <line x1="75" y1="220" x2="543" y2="220" stroke="#b91c1c" stroke-dasharray="3,2" marker-end="url(#seq)"/>
+        <text x="309" y="215" text-anchor="middle" font-size="9" fill="#b91c1c">7. Subsequent Requests Dropped at Firewall</text>
+
+        <line x1="390" y1="246" x2="673" y2="246" stroke="#4c1d95" marker-end="url(#seq)"/>
+        <text x="532" y="241" text-anchor="middle" font-size="9">8. Optional Host Scan + AI Triage</text>
+      </svg>
+    </div>
+    <div class="caption">Figure 2.4: UML Sequence Diagram for Live Attack Detection &amp; Containment</div>
+
+    <h3>2.2.4 Activity Diagram</h3>
+    <div class="figure-box">
+      <svg viewBox="0 0 720 185" width="690" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+        <defs>
+          <marker id="act" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L7,3 z" fill="#0f172a"/>
+          </marker>
+        </defs>
+        <circle cx="28" cy="52" r="9" fill="#0f172a"/>
+        <line x1="37" y1="52" x2="64" y2="52" stroke="#0f172a" marker-end="url(#act)"/>
+
+        <rect x="66" y="32" width="115" height="40" rx="12" fill="#f8fafc" stroke="#0f172a"/>
+        <text x="123" y="49" text-anchor="middle" font-size="9.5" font-weight="bold">Ingest Packet</text>
+        <text x="123" y="62" text-anchor="middle" font-size="8.5">Drop Port 8501</text>
+
+        <line x1="181" y1="52" x2="208" y2="52" stroke="#0f172a" marker-end="url(#act)"/>
+        <rect x="210" y="32" width="125" height="40" rx="12" fill="#f8fafc" stroke="#0f172a"/>
+        <text x="272" y="49" text-anchor="middle" font-size="9.5" font-weight="bold">1s Bucket &amp; 2s Avg</text>
+        <text x="272" y="62" text-anchor="middle" font-size="8.5">Local TZ Alignment</text>
+
+        <line x1="335" y1="52" x2="365" y2="52" stroke="#0f172a" marker-end="url(#act)"/>
+        <polygon points="415,20 465,52 415,84 365,52" fill="#fefce8" stroke="#a16207" stroke-width="1.3"/>
+        <text x="415" y="49" text-anchor="middle" font-size="8.5" font-weight="bold">Rate &gt;</text>
+        <text x="415" y="60" text-anchor="middle" font-size="8.5" font-weight="bold">Limit?</text>
+
+        <!-- No branch -->
+        <line x1="415" y1="84" x2="415" y2="128" stroke="#15803d" marker-end="url(#act)"/>
+        <text x="424" y="108" font-size="8.5" fill="#15803d">No</text>
+        <rect x="352" y="130" width="126" height="36" rx="10" fill="#f0fdf4" stroke="#15803d"/>
+        <text x="415" y="152" text-anchor="middle" font-size="9">Render Green Status</text>
+
+        <!-- Yes branch -->
+        <line x1="465" y1="52" x2="505" y2="52" stroke="#b91c1c" marker-end="url(#act)"/>
+        <text x="483" y="46" font-size="8.5" fill="#b91c1c">Yes</text>
+        <rect x="507" y="32" width="128" height="40" rx="12" fill="#fef2f2" stroke="#b91c1c"/>
+        <text x="571" y="49" text-anchor="middle" font-size="9.5" font-weight="bold">Active Policy?</text>
+        <text x="571" y="62" text-anchor="middle" font-size="8.5">Add Firewall Block</text>
+
+        <line x1="571" y1="72" x2="571" y2="128" stroke="#0f172a" marker-end="url(#act)"/>
+        <rect x="505" y="130" width="132" height="36" rx="10" fill="#f8fafc" stroke="#0f172a"/>
+        <text x="571" y="152" text-anchor="middle" font-size="9">Plot Timeline &amp; Audit</text>
+
+        <line x1="637" y1="148" x2="675" y2="148" stroke="#0f172a" marker-end="url(#act)"/>
+        <circle cx="688" cy="148" r="9" fill="none" stroke="#0f172a" stroke-width="1.5"/>
+        <circle cx="688" cy="148" r="5" fill="#0f172a"/>
+      </svg>
+    </div>
+    <div class="caption">Figure 2.5: UML Activity Diagram of the Detection and Response Loop</div>
+
+    <h2>2.3 Implementation Details</h2>
+
+    <h3>2.3.1 Module 1: Packet Acquisition &amp; Thread-Safe Buffering (<code>capture.py</code>)</h3>
+    <p>
+      Scapy's <code>AsyncSniffer</code> invokes its callback from a background capture thread. Mutating
+      <code>st.session_state</code> from non-Streamlit threads causes session-context exceptions; therefore,
+      <code>capture.py</code> introduces a module-level <code>collections.deque(maxlen=2500)</code> protected by a
+      <code>threading.Lock()</code>. Live capture provides an <code>AUTO_ALL</code> multi-adapter mode (sniffing active
+      Wi-Fi and Loopback interfaces simultaneously), excludes Streamlit port <code>8501</code>, and enforces the target
+      port filter (such as <code>8080</code>) inside Python if an OS adapter rejects BPF filter syntax.
+    </p>
+
+    <h3>2.3.2 Module 2: Cross-Platform Firewall Containment (<code>firewall.py</code>)</h3>
+    <p>
+      Before modifying system firewall state, <code>validate_blockable_ip()</code> parses the candidate address with
+      Python's <code>ipaddress</code> library and rejects invalid strings, loopback (<code>127.0.0.1</code>),
+      unspecified/multicast addresses, and the host's own LAN IP addresses. On Windows,
+      <code>enforce_firewall_drop()</code> invokes <code>netsh advfirewall firewall add rule</code> with a unique prefix
+      <code>SOAR_BLOCK_&lt;ip&gt;</code> and <code>profile=any</code>; on Linux it appends an <code>iptables -A INPUT</code>
+      <code>DROP</code> rule. Cleanup via <code>flush_soar_firewall_rules()</code> deletes only rules prefixed with
+      <code>SOAR_BLOCK_</code>, leaving user and OS firewall rules intact.
+    </p>
+
+    <h3>2.3.3 Module 3: Active Host Reconnaissance &amp; Gemini AI Triage (<code>recon.py</code>)</h3>
+    <p>
+      The reconnaissance module locates <code>nmap</code> on <code>PATH</code> or standard Windows installation folders.
+      If Nmap is unavailable, <code>_python_fallback_scan()</code> performs concurrent TCP connect probes across 18
+      common service ports using a <code>ThreadPoolExecutor</code>. Outputs are escaped with <code>html.escape()</code>
+      before HTML terminal rendering and summarized into three actionable SOC bullet points via Gemini (with automatic
+      fallback to heuristic SOC triage when offline).
+    </p>
+
+    <h3>2.3.4 Module 4: Interactive Timeline &amp; SOC Dashboard (<code>charts.py</code>, <code>streamlit_app.py</code>)</h3>
+    <p>
+      <code>charts.py</code> converts Unix epoch timestamps to the host's local timezone and renders a multi-curve
+      Plotly spline figure combining Total Traffic (PPS), Top Source IP (PPS), and a 6-second Moving Baseline, overlaid
+      with shaded breach intervals, an Attack Started marker, a Peak PPS callout, and green Firewall Blocked event
+      lines. Adapter and host IP discovery helpers are cached via <code>@st.cache_data(ttl=15)</code> to ensure rapid
+      1-second UI refreshes.
+    </p>
+
+    <h3>2.3.5 Module 5: Client Load Simulator &amp; CLI Harness (<code>target_server.py</code>, <code>attacker.py</code>)</h3>
+    <p>
+      To allow safe, repeatable classroom demonstrations disconnected from campus Wi-Fi restrictions,
+      <code>target_server.py</code> hosts a threaded HTTP/1.1 target on port <code>8080</code> (with
+      <code>request_queue_size = 128</code> and <code>Connection: close</code>) and serves the browser-based
+      <strong>Client Traffic Load Simulator</strong> at <code>/demo</code>. A standalone standard-library script
+      (<code>attacker.py</code>) is also provided for two-laptop hotspot testing.
+    </p>
+  </div>
+
+  <!-- ==================== CHAPTER 3 ==================== -->
+  <div class="chapter-break">
+    <div class="page-header-bar">
+      <span>Chapter 3 &mdash; Results and Evaluation</span>
+      <span>UCS503 &mdash; Software Engineering</span>
+    </div>
+    <div class="chapter-header">
+      <div class="chapter-num">Chapter 3</div>
+      <h1 class="chapter-title">Results and Evaluation</h1>
+    </div>
+
+    <h2>3.1 Testing Methodology</h2>
+    <ul>
+      <li><strong>Unit Testing:</strong> Automated <code>unittest</code> assertions validating IP guards, ring-buffer capacity, port filtering, benchmark PCAP generation, timezone alignment, Plotly trace/shape counts, and HTML escaping.</li>
+      <li><strong>Integration Testing:</strong> Automated UI and state-machine verification using <code>streamlit.testing.v1.AppTest</code> executing full dashboard renders under both standby and populated attack telemetry.</li>
+      <li><strong>Performance Testing:</strong> Measuring memory bounds under sustained packet ingestion, UI rerun latency with and without adapter caching, and separation between normal baseline PPS and flood PPS.</li>
+      <li><strong>Live Network Testing:</strong> End-to-end validation between a mobile client running the <code>/demo</code> load simulator and the Windows host running the SOAR dashboard and Windows Defender Firewall containment.</li>
+    </ul>
+
+    <h2>3.2 Comprehensive Test Cases</h2>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:9%;">ID</th>
+          <th style="width:22%;">Test Case</th>
+          <th style="width:27%;">Input / Precondition</th>
+          <th style="width:29%;">Expected Result</th>
+          <th style="width:13%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>TC-01</code></td>
+          <td>IP Validation &amp; Self-Host Guard</td>
+          <td>Inputs: <code>127.0.0.1</code>, <code>0.0.0.0</code>, invalid string, host IP, external <code>172.20.10.1</code></td>
+          <td>Rejects loopback, invalid, and host IPs; accepts external IPv4</td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><code>TC-02</code></td>
+          <td>Buffer Cap &amp; Port Filtering</td>
+          <td><code>_ALLOWED_PORT=8080</code>; frames on ports <code>8501</code>, <code>80</code>, and <code>8080</code></td>
+          <td>Buffer maxlen is <code>2500</code>; drops <code>8501</code>/<code>80</code> in live mode, keeps <code>8080</code></td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><code>TC-03</code></td>
+          <td>Multi-Adapter Discovery</td>
+          <td>Call <code>list_capture_interfaces()</code> on Windows host</td>
+          <td>Returns <code>AUTO_ALL</code> as primary default adapter choice</td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><code>TC-04</code></td>
+          <td>Benchmark PCAP Generation</td>
+          <td>Generate 50 normal + 150 burst packets via <code>generate_benchmark_pcap</code></td>
+          <td>Valid <code>.pcap</code> file &gt; 1 KB written without Npcap admin lock</td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><code>TC-05</code></td>
+          <td>Timeline Chart &amp; Local TZ</td>
+          <td>5s series peaking at <code>180 PPS</code> with block event at <code>t-1s</code></td>
+          <td>Produces 4 Plotly traces, breach shapes, and local-time annotations</td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><code>TC-06</code></td>
+          <td>Recon Fallback &amp; XSS Escaping</td>
+          <td>Run <code>run_direct_nmap("127.0.0.1")</code> &amp; pass <code>&lt;script&gt;</code> to triage</td>
+          <td>Returns TCP port report and escapes HTML tags cleanly</td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><code>TC-07</code></td>
+          <td>Client Load Simulator Config</td>
+          <td>Inspect <code>target_server.ThreadedHTTPServer</code> &amp; <code>DEMO_HTML</code></td>
+          <td><code>request_queue_size=128</code>; renders Client Traffic Load Simulator</td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+        <tr>
+          <td><code>TC-08</code></td>
+          <td>Streamlit Full UI Integration</td>
+          <td>Execute <code>AppTest</code> on standby and simulated attack buffer</td>
+          <td>Zero exceptions; renders 4 KPI metrics and 2 data tables</td>
+          <td><span class="badge-pass">PASS</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="caption">Table 3.1: Automated Test Case Execution Matrix (<code>tests/test_soar.py</code>)</div>
+
+    <h2>3.3 Test Case Execution &amp; Screenshots</h2>
+    <p>
+      Executing the automated suite (<code>python tests/test_soar.py</code>) verifies all eight unit and integration test
+      cases (<code>TC-01</code> through <code>TC-08</code>) in <code>17.580s</code> with zero failures:
+    </p>
+    <pre>test_tc01_firewall_ip_validation_and_self_guard ... ok
+test_tc02_capture_buffer_cap_and_port_filtering ... ok
+test_tc03_interface_discovery_auto_first ... ok
+test_tc04_benchmark_pcap_generation_and_readback ... ok
+test_tc05_timeline_chart_and_local_tz_markers ... ok
+test_tc06_recon_fallback_and_ai_summary ... ok
+test_tc07_client_load_simulator_html_and_backlog ... ok
+test_tc08_streamlit_dashboard_integration ... ok
+----------------------------------------------------------------------
+Ran 8 tests in 17.580s — OK</pre>
+
+    <div class="figure-box">
+      <img src="assets/ui_live_side_by_side.jpg" alt="Side-by-side Live Dashboard and Client Traffic Simulator" />
+    </div>
+    <div class="caption">Figure 3.1: Live Evaluation View &mdash; SOAR Dashboard Alongside Client Traffic Controller</div>
+
+    <div class="figure-box">
+      <img src="assets/ui_top_talkers_recon.png" alt="Top Traffic Sources and Host Reconnaissance Output" />
+    </div>
+    <div class="caption">Figure 3.2: Origin Matrix (Top Talkers), Audit Panel, and Active Host Reconnaissance Output</div>
+
+    <h2>3.4 Performance Metrics &amp; Graphical Analysis</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Initial Prototype (Before Optimization)</th>
+          <th>Final Modular System (Achieved)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Maximum Packet Buffer Footprint</td>
+          <td>15,000&ndash;20,000 rows (triggered Pandas <code>MemoryError</code>)</td>
+          <td>2,500 rows bounded deque (0 memory errors)</td>
+        </tr>
+        <tr>
+          <td>UI Adapter/IP Discovery Overhead</td>
+          <td>Uncached per 1s rerun (~0.8&ndash;1.5s stall)</td>
+          <td>Cached via <code>@st.cache_data(ttl=15)</code> (&lt; 50ms UI cycle)</td>
+        </tr>
+        <tr>
+          <td>TCP Accept Backlog on Target</td>
+          <td>Default <code>listen(5)</code> (dropped concurrent requests)</td>
+          <td><code>request_queue_size = 128</code> (smooth burst intake)</td>
+        </tr>
+        <tr>
+          <td>Automated Test Suite Pass Rate</td>
+          <td>0 automated tests (manual notebook cells only)</td>
+          <td>8 / 8 automated tests passing (100% pass in 17.58s)</td>
+        </tr>
+        <tr>
+          <td>False Block on Normal Traffic</td>
+          <td>Single-second spike at 30 PPS caused early false block</td>
+          <td>2s sustained window at 35 PPS keeps 1 req/s traffic green</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="caption">Table 3.2: Engineering Optimization &amp; Performance Comparison</div>
+
+    <div class="figure-box">
+      <svg viewBox="0 0 720 220" width="690" xmlns="http://www.w3.org/2000/svg" font-family="Arial, sans-serif">
+        <!-- Axes -->
+        <line x1="65" y1="25" x2="65" y2="175" stroke="#334155" stroke-width="1.3"/>
+        <line x1="65" y1="175" x2="685" y2="175" stroke="#334155" stroke-width="1.3"/>
+        <!-- Grid lines -->
+        <line x1="65" y1="138" x2="685" y2="138" stroke="#e2e8f0"/>
+        <line x1="65" y1="100" x2="685" y2="100" stroke="#e2e8f0"/>
+        <line x1="65" y1="62" x2="685" y2="62" stroke="#e2e8f0"/>
+        <text x="55" y="178" text-anchor="end" font-size="9" fill="#475569">0</text>
+        <text x="55" y="141" text-anchor="end" font-size="9" fill="#475569">50</text>
+        <text x="55" y="103" text-anchor="end" font-size="9" fill="#475569">100</text>
+        <text x="55" y="65" text-anchor="end" font-size="9" fill="#475569">150</text>
+        <text x="20" y="102" text-anchor="middle" font-size="9.5" transform="rotate(-90 20 102)" fill="#334155">Packet Rate (PPS)</text>
+
+        <!-- Threshold line at 35 PPS => y = 175 - (35/150)*113 = 148.6 -->
+        <line x1="65" y1="149" x2="685" y2="149" stroke="#d97706" stroke-width="1.4" stroke-dasharray="5,4"/>
+        <text x="680" y="143" text-anchor="end" font-size="9" font-weight="bold" fill="#b45309">Threshold: 35 PPS</text>
+
+        <!-- Shaded attack zone x=290..490 -->
+        <rect x="290" y="25" width="200" height="150" fill="rgba(225, 29, 72, 0.08)"/>
+        <line x1="290" y1="25" x2="290" y2="175" stroke="#e11d48" stroke-dasharray="3,3"/>
+        <text x="295" y="37" font-size="9" font-weight="bold" fill="#be123c">Attack Started</text>
+
+        <line x1="470" y1="25" x2="470" y2="175" stroke="#059669" stroke-width="1.5" stroke-dasharray="5,3"/>
+        <text x="476" y="37" font-size="9" font-weight="bold" fill="#047857">Windows Firewall Block</text>
+
+        <!-- Smooth Traffic Curve -->
+        <path d="M 65 166 Q 140 164, 210 165 T 290 148 Q 340 60, 405 42 T 470 112 Q 530 164, 685 167"
+              fill="none" stroke="#0284c7" stroke-width="2.8"/>
+
+        <!-- Peak marker -->
+        <circle cx="405" cy="42" r="4.5" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
+        <text x="405" y="32" text-anchor="middle" font-size="9" font-weight="bold" fill="#be123c">Peak Burst (~175 PPS)</text>
+
+        <!-- X labels -->
+        <text x="150" y="193" text-anchor="middle" font-size="9" fill="#475569">Phase 1: Normal (~10 PPS)</text>
+        <text x="380" y="193" text-anchor="middle" font-size="9" fill="#be123c">Phase 2: Flood Breach</text>
+        <text x="585" y="193" text-anchor="middle" font-size="9" fill="#047857">Phase 3: Contained</text>
+      </svg>
+    </div>
+    <div class="caption">Figure 3.3: Analytical Traffic Response Curve Across Normal, Breach, and Containment Phases</div>
+
+    <h2>3.5 Challenges &amp; Engineering Resolutions</h2>
+    <ul>
+      <li><strong>Colab-to-Windows Portability:</strong> Replaced notebook-only <code>!apt-get</code>, <code>google.colab.userdata</code>, and Linux-only <code>iptables</code> with cross-platform Windows Firewall (<code>netsh advfirewall</code>) and Npcap interface selection.</li>
+      <li><strong>Pandas <code>MemoryError</code> on Unfiltered Loopback Capture:</strong> Sniffing Streamlit's own port (<code>8501</code>) previously flooded the buffer to 15,000 rows. Solved by explicitly dropping port <code>8501</code>, enforcing port filtering in Python, disabling heavy <code>pkt.summary()</code> calls in live mode, and capping the ring buffer at <code>2,500</code> frames.</li>
+      <li><strong>UTC vs. Local Clock Drift on Chart:</strong> <code>pd.to_datetime(..., unit='s')</code> defaulted to UTC while packet table strings used local IST, causing a 5.5-hour mismatch with firewall event markers. Unified both via <code>to_local_naive_dt()</code>.</li>
+      <li><strong>Single-Second False Positives &amp; Attribution Accuracy:</strong> Aligned Top Talkers risk classification and firewall triggers onto a 2-second rolling sustained rate and scoped attacker attribution exclusively to non-host IPs inside the breach window.</li>
+    </ul>
+  </div>
+
+  <!-- ==================== CHAPTER 4 ==================== -->
+  <div class="chapter-break">
+    <div class="page-header-bar">
+      <span>Chapter 4 &mdash; Conclusion</span>
+      <span>UCS503 &mdash; Software Engineering</span>
+    </div>
+    <div class="chapter-header">
+      <div class="chapter-num">Chapter 4</div>
+      <h1 class="chapter-title">Conclusion</h1>
+    </div>
+
+    <h2>4.1 Summary of Work</h2>
+    <p>
+      The SOAR Network Defense Center evolved from an experimental Google Colab notebook into a modular, verified
+      desktop SOC platform capable of real-time network telemetry, forensic PCAP inspection, automated host-level
+      firewall containment, active reconnaissance, and AI-assisted triage. Every core subsystem was refactored into
+      dedicated modules and validated using an automated 8-case test suite alongside live multi-device evaluation.
+    </p>
+
+    <h2>4.2 Key Findings</h2>
+    <ol>
+      <li><strong>Thread Isolation Is Essential in Interactive Dashboards:</strong> Decoupling Scapy's capture callback from Streamlit's session state via a lock-protected <code>deque</code> eliminated background thread errors.</li>
+      <li><strong>Self-Traffic &amp; Port Exclusion Prevent Feedback Loops:</strong> Excluding the dashboard's own web port (<code>8501</code>) and guarding against self-IP blocking are mandatory safeguards in live-sniffing SOAR tools.</li>
+      <li><strong>Sustained Rolling Windows Reduce False Positives:</strong> Requiring a 2-second sustained breach avoids triggering containment on transient page-load bursts while reacting rapidly to genuine volumetric floods.</li>
+    </ol>
+
+    <h2>4.3 Future Work and Recommendations</h2>
+    <ol>
+      <li>Extend detection heuristics beyond volumetric PPS to detect SYN-to-ACK ratio anomalies and horizontal port scans.</li>
+      <li>Persist incident logs and firewall audit trails to SQLite or PostgreSQL for long-term historical forensics.</li>
+      <li>Add role-based authentication and encrypted TLS transport for multi-analyst remote SOC deployments.</li>
+      <li>Integrate automated unblocking timers (TTL-based quarantine release) alongside manual rule flushing.</li>
+    </ol>
+
+    <h2>4.4 Final Remarks</h2>
+    <p>
+      Building and hardening this system demonstrated that effective security automation depends equally on accurate
+      telemetry math, defensive OS-level guardrails, and resilient software engineering practices such as modularity,
+      bounded memory management, and automated regression testing.
+    </p>
+  </div>
+
+  <!-- ==================== CHAPTER 5: JOURNALS ==================== -->
+  <div class="chapter-break">
+    <div class="page-header-bar">
+      <span>Chapter 5 &mdash; Project Journals &amp; Individual Contributions</span>
+      <span>UCS503 &mdash; Software Engineering</span>
+    </div>
+    <div class="chapter-header">
+      <div class="chapter-num">Chapter 5</div>
+      <h1 class="chapter-title">Project Journals &amp; Individual Contributions</h1>
+    </div>
+
+    <h2>5.1 Development Timeline &amp; Engineering Journal</h2>
+    <p>
+      This chapter documents chronological engineering milestones, defects uncovered during integration, and concrete
+      code improvements completed by both team members across the semester.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:13%;">Date</th>
+          <th style="width:17%;">Contributor</th>
+          <th style="width:20%;">Module / Focus</th>
+          <th style="width:24%;">Code Errors / Issues Faced</th>
+          <th style="width:26%;">Improvements Implemented</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Aug&ndash;Sep 2026 (Mid-Term)</td>
+          <td>Shivam Batra &amp; Emaan Dhillon</td>
+          <td><code>SOAR.ipynb</code> Prototype</td>
+          <td>Notebook depended on Colab <code>userdata</code>, <code>ngrok</code>, and hardcoded <code>eth0</code>; no dataset available.</td>
+          <td>Built synthetic <code>generate_benchmark_pcap()</code>, initial Streamlit dark SOC UI, Nmap + Gemini triage integration.</td>
+        </tr>
+        <tr>
+          <td>Nov 2026 (Phase 2A)</td>
+          <td>Shivam Batra</td>
+          <td>Modular Refactor (<code>firewall.py</code>, <code>capture.py</code>)</td>
+          <td>Colab Linux <code>iptables</code> failed on Windows; Scapy callback mutated <code>st.session_state</code> from worker thread.</td>
+          <td>Migrated to modular Windows/Linux architecture; added <code>netsh advfirewall</code> blocking, IP self-guard, and lock-protected <code>deque</code>.</td>
+        </tr>
+        <tr>
+          <td>Nov 2026 (Phase 2B)</td>
+          <td>Emaan Dhillon</td>
+          <td><code>target_server.py</code>, <code>attacker.py</code></td>
+          <td>Unable to run live flood over campus Wi-Fi; Python default <code>listen(5)</code> dropped bursts; 900ms JS timeout caused false block text.</td>
+          <td>Created isolated hotspot test harness + browser <code>/demo</code> load simulator; increased <code>request_queue_size=128</code> and fixed consecutive-fail threshold.</td>
+        </tr>
+        <tr>
+          <td>Nov 2026 (Phase 2C)</td>
+          <td>Shivam Batra</td>
+          <td><code>charts.py</code>, <code>streamlit_app.py</code></td>
+          <td>UTC-vs-IST 5.5h chart offset; UI stalled on every 1s refresh; cumulative packet count marked normal nodes <code>CRITICAL</code>.</td>
+          <td>Added <code>to_local_naive_dt()</code>, multi-curve spline timeline with block markers, <code>@st.cache_data</code> caching, and sustained PPS attribution.</td>
+        </tr>
+        <tr>
+          <td>Nov 2026 (Phase 2D)</td>
+          <td>Emaan Dhillon &amp; Shivam Batra</td>
+          <td><code>capture.py</code>, <code>recon.py</code>, <code>tests/test_soar.py</code></td>
+          <td>Unfiltered Loopback captured port <code>8501</code> causing Pandas <code>MemoryError</code>; missing Nmap binary blocked recon testing; L2 MAC resolution error in non-admin PCAP generation.</td>
+          <td>Hard-blocked port <code>8501</code>, capped buffer at <code>2,500</code> rows, added 18-port TCP fallback in <code>recon.py</code>, fixed explicit MACs in <code>generate_benchmark_pcap()</code>, and verified 8/8 automated tests.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="caption">Table 5.1: Chronological Engineering Journal &amp; Defect Resolution Log</div>
+
+    <h2>5.2 Summary of Individual Contributions</h2>
+    <ul>
+      <li><strong>1024030845 &mdash; Shivam Batra:</strong> System architecture design, cross-platform firewall containment module (<code>firewall.py</code>), thread-safe packet capture &amp; memory bounding (<code>capture.py</code>), multi-curve Plotly incident timeline (<code>charts.py</code>), SOC dashboard optimization (<code>streamlit_app.py</code>), and GitHub repository setup.</li>
+      <li><strong>1024030851 &mdash; Emaan Dhillon:</strong> Live Client Traffic Load Simulator (<code>target_server.py</code>), two-laptop hotspot CLI harness (<code>attacker.py</code>), active reconnaissance fallback &amp; Gemini AI triage integration (<code>recon.py</code>), automated test suite (<code>tests/test_soar.py</code>), UML design diagrams, and final report documentation.</li>
+    </ul>
+  </div>
+
+  <!-- ==================== BIBLIOGRAPHY ==================== -->
+  <div class="chapter-break">
+    <div class="page-header-bar">
+      <span>Bibliography</span>
+      <span>UCS503 &mdash; Software Engineering</span>
+    </div>
+    <div class="chapter-header">
+      <h1 class="chapter-title">Bibliography</h1>
+    </div>
+
+    <p>[Bio24] Philippe Biondi and the Scapy Community. <em>Scapy: Interactive Packet Manipulation Program &amp; Library</em>. 2024. URL: https://scapy.net/</p>
+    <p>[Str24] Streamlit Inc. <em>Streamlit Documentation: Build and Share Data Apps in Python</em>. 2024. URL: https://docs.streamlit.io/</p>
+    <p>[Plo24] Plotly Technologies Inc. <em>Plotly Python Open Source Graphing Library</em>. 2024. URL: https://plotly.com/python/</p>
+    <p>[Npc24] Nmap Project. <em>Npcap: Windows Packet Capture Library and Driver &amp; Nmap Reference Guide</em>. 2024. URL: https://nmap.org/</p>
+    <p>[Goo25] Google AI. <em>Gemini API Developer Documentation</em>. 2025. URL: https://ai.google.dev/</p>
+    <p>[CIC19] Iman Sharafaldin, Arash Habibi Lashkari, Saqib Hakak, and Ali A. Ghorbani. &ldquo;Developing Realistic Distributed Denial of Service (DDoS) Attack Dataset and Taxonomy.&rdquo; <em>IEEE International Carnahan Conference on Security Technology (ICCST)</em>, 2019.</p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+*.pcap
+*.pcapng
+temp_upload.pcap
+.venv/
+venv/
+.env
+_chrome_*/
+.DS_Store
+Thumbs.db
