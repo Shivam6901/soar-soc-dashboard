@@ -10,8 +10,8 @@
 - 1024030851 — Emaan Dhillon
 - **Group:** 3C62 — B.E. Third Year, CSE (5th Semester)
 
-**Submitted to:** [Dr. / Ms. Faculty Member Name]  
-**GitHub Repository:** https://github.com/[your-username]/[soar-soc-dashboard]
+**Submitted to:** Reaya Grewal  
+**GitHub Repository:** https://github.com/Shivam6901/soar-soc-dashboard
 
 ---
 
@@ -39,7 +39,7 @@ The project was structured around the following SMART engineering objectives:
 
 ### 1.3 Repository & Source Artifacts
 
-- **GitHub Repository Link:** https://github.com/[your-username]/[soar-soc-dashboard]
+- **GitHub Repository Link:** https://github.com/Shivam6901/soar-soc-dashboard
 
 All modular source files, automated unit/integration tests, and setup documentation are maintained in the repository above (migrated from the initial Google Colab prototype `SOAR.ipynb` to a modular Python architecture).
 
